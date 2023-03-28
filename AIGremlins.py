@@ -32,6 +32,7 @@ class AIGremlin:
         self.temperature = self.default_temperature
         self.temperature_escalation = temperature_escalation
         self.instructions = instructions
+        self.functions = {}
 
     def prompt_format(self, error, func, *args, **kwargs):
         """The prompt to OpenAI for error correcting the error. """
@@ -87,6 +88,8 @@ class AIGremlin:
             self.temperature = self.default_temperature
 
         except Exception as e:
+            print(e)
+            print(func.__name__)
             source_code = self.func_tracker
 
         def wrapper(*args, **kwargs):
