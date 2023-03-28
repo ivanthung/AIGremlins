@@ -14,7 +14,7 @@ gremlin = AIGremlin(api_key=API_KEY,
 
 @gremlin.ai_backstop
 def funcb():
-    x = 1
+    x = q
     print("Namespace is working!!")
 
 @gremlin.ai_backstop
@@ -22,6 +22,7 @@ def test_func(df, b) -> int:
     """ This function should only return the first column of the dataframe"""
     for i in range(b):
         print(b + 's')
+    funcb()
     print(df)
     return c
 

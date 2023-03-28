@@ -46,7 +46,7 @@ class AIGremlin:
         Only fix the error, don't remove for example other function calls within the function.
         Only respond with the function, don't give an explanation.
         {self.instructions}
-        Always add a decorator again to the function definition.
+        Always add a decorator again above the function, like this.
         """
         return prompt
 
@@ -82,15 +82,15 @@ class AIGremlin:
         """
         try:
             # This try block will only run on the first iteration of the decorator. All values are set to defaults.
+
             source_code = inspect.getsource(func)
             self.namespace = func.__globals__
             self.iterations = 0
             self.temperature = self.default_temperature
 
         except Exception as e:
-            print(e)
-            print(func.__name__)
-            source_code = self.func_tracker
+            # Dynamically executed code cannot be inspected, so we need to get the source code from a dictionary.
+            source_code = self.functions[func.__name__]
 
         def wrapper(*args, **kwargs):
             try:
@@ -109,7 +109,7 @@ class AIGremlin:
                 response = self.get_ai_response(prompt=prompt, temperature=self.temperature)
                 self.update_temperature()
 
-                self.func_tracker = response["response"]
+                self.functions[func.__name__] = response["response"]
                 self.tokens += response["tokens"]
 
                 print("Local code failed, using AI code")
@@ -118,11 +118,11 @@ class AIGremlin:
                     print("Iteration: ", self.iterations)
                     print(
                     f"{response['tokens']} tokens used, total: {self.tokens} tokens used of a max of {self.max_tokens}")
-                print("Changing function to ", self.func_tracker)
+                print("Changing function to ", self.functions[func.__name__])
 
-                function_name = self.get_function_name(self.func_tracker)
-                exec(self.func_tracker, self.namespace)
-                new_function = self.namespace[function_name]
+                # function_name = self.get_function_name(self.functions[func.__name__])
+                exec(self.functions[func.__name__], self.namespace)
+                new_function = self.namespace[func.__name__]
                 result = new_function(*args, **kwargs)
                 return result
 
