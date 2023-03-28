@@ -5,16 +5,23 @@ import pandas as pd
 
 load_dotenv()
 API_KEY = os.getenv("open_ai_key")
-MAX_ITERATIONS = 2
+MAX_ITERATIONS = 4
 
-gremlin = AIGremlin(api_key=API_KEY, max_iterations=MAX_ITERATIONS)
+gremlin = AIGremlin(api_key=API_KEY,
+                    max_iterations=MAX_ITERATIONS,
+                    verbose=True,
+                    )
 
+@gremlin.ai_backstop
 def funcb():
+    x = q
     print("Namespace is working!!")
 
 @gremlin.ai_backstop
 def test_func(df, b) -> int:
     """ This function should only return the first column of the dataframe"""
+    for i in range(b):
+        print(b + 's')
     funcb()
     print(df)
     return c
