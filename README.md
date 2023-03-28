@@ -1,6 +1,5 @@
 # AIGremlins
 
-
 AI Gremlin - Automatic Error Correction with OpenAI
 AI Gremlin is a Python module that leverages OpenAI's GPT-3 to automatically fix errors in your Python code. The module contains two main classes, GremlinTest and AIgremlin, which work together to handle exceptions and get suggestions for fixes from OpenAI's API.
 
@@ -27,7 +26,7 @@ The suggestion is received from OpenAI's API, and a new fixed function is genera
 The fixed function is added to the original namespace and executed.
 The process continues until the fixed function executes without errors or the maximum number of iterations is reached.
 
-###Usage
+### Usage
 1. Import the AIgremlin class from the module.
 2. Instantiate an AIgremlin object with your OpenAI API key and other optional parameters (e.g., max_iterations, max_tokens, temperature, temperature_escalation, verbose, and instructions).
 3. Define your function and apply the ai_backstop decorator to it.
@@ -48,10 +47,7 @@ def buggy_function(a, b):
 result = buggy_function(4, 0)
 ```
 
-.. _pyscaffold-notes:
-
-Note
-====
-
-This project has been set up using PyScaffold 4.4. For details and usage
-information on PyScaffold see https://pyscaffold.org/.
+### Options
+1. temperature -> default temperature of the model used.
+2. temperature escalation -> the model can become increasingly creative. Should be somewhere between the range of 0.1-0.4 as the max temperature is 1.
+3. instructions -> you can give additional instructions to the AI to take into consideration.
