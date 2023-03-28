@@ -10,6 +10,7 @@ MAX_ITERATIONS = 4
 gremlin = AIGremlin(api_key=API_KEY,
                     max_iterations=MAX_ITERATIONS,
                     verbose=True,
+                    temperature_escalation=0.2
                     )
 
 @gremlin.ai_backstop
