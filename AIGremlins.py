@@ -1,24 +1,14 @@
+"""
+A class with a decorator that will try to fix a function using OpenAI.
+Executes dynamically generated code in the namespace it was called from.
+Don't use this for production code, it's a proof of concept.
+"""
+
 import openai
 import re
 import inspect
 
-class GremlinTest:
-    def __init__(self):
-        self.functions = []
-        self.source_code = ""
-
-    def decorator(self, func):
-        def wrapper(*args, **kwargs):
-            breakpoint()
-            source_code = inspect.getsource(func)
-            eval(source_code)
-
-            return func(*args, **kwargs)
-
-        return wrapper
-
-
-class AIgremlin:
+class AIGremlin:
     def __init__(
         self,
         api_key,

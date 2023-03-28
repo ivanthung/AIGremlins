@@ -1,0 +1,12 @@
+.gitignore
+AIGremlins.py
+README.md
+requirements.txt
+setup.py
+try_me_out.py
+AIGremlins.egg-info/PKG-INFO
+AIGremlins.egg-info/SOURCES.txt
+AIGremlins.egg-info/dependency_links.txt
+AIGremlins.egg-info/requires.txt
+AIGremlins.egg-info/top_level.txt
+__pycache__/AIGremlins.cpython-39.pyc

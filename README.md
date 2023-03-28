@@ -9,7 +9,30 @@ Using this code in real applications is a terrible idea for many reasons, includ
 - There's no garantuee that the AI generated function won't break anything else or delete something import.
 - Many other reasons.
 
-Don't even think about using this in production. That being said:
+Don't even think about using this in production.
+
+## Installation
+```
+pip install aigremlins
+```
+
+## Example usage
+```
+from aigremlins import AIGremlin
+
+# Initialize AI Gremlin instance with your OpenAI API key
+gremlin = AIgrAIGremlinemlin(api_key="your_openai_api_key", verbose=True)
+
+# Define the function with an error
+@gremlin.ai_backstop
+def buggy_function(a, b):
+    """ This function should always return a value"""
+    return a / b
+
+# Call the function with parameters that cause an exception
+result = buggy_function(4, 0)
+```
+
 
 ### Features
 Automatically detects and corrects errors in your Python functions using OpenAI's GPT-3.
@@ -32,20 +55,7 @@ The process continues until the fixed function executes without errors or the ma
 3. Define your function and apply the ai_backstop decorator to it.
 
 Call the decorated function as you normally would. If an exception is encountered, the AI Gremlin will automatically attempt to fix it using OpenAI's API.
-```
-from AIgremlins import AIgremlin
 
-# Initialize AI Gremlin instance with your OpenAI API key
-ai_gremlin = AIgremlin(api_key="your_openai_api_key", verbose=True)
-
-# Define the function with an error
-@ai_gremlin.ai_backstop
-def buggy_function(a, b):
-    return a / b
-
-# Call the function with parameters that cause an exception
-result = buggy_function(4, 0)
-```
 
 ### Options
 1. temperature -> default temperature of the model used.
