@@ -65,11 +65,6 @@ class AIGremlin:
             "tokens": response.usage.total_tokens,
         }
 
-    def get_function_name(self, func):
-        match = re.search(r"def\s+(\w+)\(", func)
-        if match:
-            return match.group(1)
-
     def update_temperature(self):
         if((self.temperature + self.temperature_escalation) < 1.0):
             self.temperature += self.temperature_escalation

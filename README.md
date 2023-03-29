@@ -1,7 +1,7 @@
 # AIGremlins
 
 AI Gremlin - Automatic Error Correction with OpenAI
-AI Gremlin is a Python module that leverages OpenAI's GPT-3 to automatically fix errors in your Python code. The module contains two main classes, GremlinTest and AIgremlin, which work together to handle exceptions and get suggestions for fixes from OpenAI's API.
+AI Gremlin is a Python module that leverages OpenAI's GPT-3 to automatically fix errors in your Python code. The module contains the class AIgremlin, which handles exceptions and get suggestions for fixes from OpenAI's API.
 
 Note:
 Using this code in real applications is a terrible idea for many reasons, including:
