@@ -18,7 +18,8 @@ class AIGremlin:
         temperature = 0.2,
         temperature_escalation = 0.0,
         verbose=False,
-        instructions=''
+        instructions='',
+        model = 'gpt-3.5-turbo'
     ):
         self.api_key = api_key
         openai.api_key = self.api_key
@@ -46,7 +47,7 @@ class AIGremlin:
         Provide a fix by creating a new function that solves the error.
         Stay as close as possible to the intent of the original function, if it is indicated in the doc string.
         Only fix the error, don't remove for example other function calls within the function.
-        Only respond with the function, don't give an explanation.
+        Only respond with the function, don't give an explanation, don't change function names.
         {self.instructions}
         Always add a decorator again above the function, like this.
         """
@@ -54,14 +55,15 @@ class AIGremlin:
 
     def get_ai_response(self, prompt, temperature):
         """The function that will call OpenAI and return the response."""
-        response = openai.Completion.create(
-            model="text-davinci-003",
-            prompt=prompt,
+        response = openai.ChatCompletion.create(
+            model="gpt-4",
+            messages = [{"role": "system", "content": "You are a helpful coding assistant."},
+                        {"role": "user", "content": prompt},],
             temperature=temperature,
             max_tokens=int(len(prompt) * 2),
         )
         return {
-            "response": response.choices[0].text,
+            "response": response['choices'][0]['message']['content'],
             "tokens": response.usage.total_tokens,
         }
 
